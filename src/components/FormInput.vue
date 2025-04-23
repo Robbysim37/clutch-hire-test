@@ -34,7 +34,7 @@ defineProps({
 .inputGroup {
   position: relative;
   height: 40.32px;
-  margin-bottom: 31px;
+  margin-bottom: 30.96px;
   width: 100%;
 }
 

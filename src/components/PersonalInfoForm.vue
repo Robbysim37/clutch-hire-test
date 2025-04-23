@@ -1,6 +1,6 @@
 <template>
   <div class="formContainer">
-    <form class="form" @submit.prevent="submitForm">
+    <form v-if="!thankYou" class="form" @submit.prevent="submitForm">
       <div class="callToActionContainer">
         <div class="callToAction">Have us reach out</div>
       </div>
@@ -23,12 +23,16 @@
         </button>
       </div>
     </form>
+    <ThankYouMessage v-else />
   </div>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import FormInput from "./FormInput.vue";
+import ThankYouMessage from "./ThankYouMessage.vue";
+
+const thankYou = ref(false);
 const formData = reactive({
   first: "",
   last: "",
@@ -36,6 +40,13 @@ const formData = reactive({
   phone: "",
   email: "",
 });
+
+const triggerMessage = () => {
+  thankYou.value = true;
+  setTimeout(() => {
+    thankYou.value = false;
+  }, 5000);
+};
 
 const submitForm = async () => {
   try {
@@ -54,8 +65,7 @@ const submitForm = async () => {
       throw new Error(`Server error: ${response.status}`);
     }
 
-    const result = await response.json();
-    console.log("Success:", result);
+    triggerMessage();
   } catch (error) {
     console.error("Submission failed:", error);
   }
