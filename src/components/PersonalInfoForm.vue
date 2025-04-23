@@ -32,7 +32,7 @@ import { reactive, ref } from "vue";
 import FormInput from "./FormInput.vue";
 import ThankYouMessage from "./ThankYouMessage.vue";
 
-const thankYou = ref(false);
+const thankYou = ref(true);
 const formData = reactive({
   first: "",
   last: "",
